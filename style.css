@@ -1,0 +1,39 @@
+body {
+  background-color: #35654d;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.grid-col-span {
+  grid-column: span 2;
+}
+
+div {
+  text-align: center;
+}
+
+h2 {
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+button {
+  width: 10rem;
+  background-color: goldenrod;
+  border: 0px;
+  color: #35654d;
+  margin: 5px;
+  height: 1.5rem;
+}
