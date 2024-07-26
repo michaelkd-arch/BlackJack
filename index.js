@@ -1,13 +1,13 @@
-let cardEl = document.getElementById('card-el');
-let sumEl = document.getElementById('sum-el');
-let chipEl = document.getElementById('chip-el')
-let btnStart = document.getElementById('btn-start');
-let btnNew = document.getElementById('btn-new');
-let messageEl = document.getElementById('message-el');
-let playerEl = document.getElementById('player-el');
+const cardEl = document.getElementById('card-el');
+const sumEl = document.getElementById('sum-el');
+const chipEl = document.getElementById('chip-el')
+const btnStart = document.getElementById('btn-start');
+const btnNew = document.getElementById('btn-new');
+const messageEl = document.getElementById('message-el');
+const playerEl = document.getElementById('player-el');
 
-let dealerEl = document.getElementById('dealer-el');
-let dealerSumEl = document.getElementById('dealer-sum');
+const dealerEl = document.getElementById('dealer-el');
+const dealerSumEl = document.getElementById('dealer-sum');
 
 
 let playerObj = {
@@ -50,12 +50,12 @@ function startGame() {
 
 
 function check() {
-  if (sum < 21) {
-    //pass
-    // messageEl.textContent = 'Do you want a new card? ';
-  } else if (sum === 21) {
+  if (sum === 21) {
     messageEl.textContent = 'You win. ';
     gameOn = false;
+    playerObj.chips += 15;
+  } else if (sum < 21) {
+    //pass
   } else {
     messageEl.textContent = 'You lose. ';
     gameOn = false;
@@ -117,7 +117,8 @@ function checkDealer() {
   if (dealerSum > 21) {
     messageEl.textContent = 'You win. ';
     gameOn=false;
-  } else if (sum === 21) {
+    playerObj.chips += 15;
+  } else if (dealerSum === 21) {
     messageEl.textContent = 'You lose. ';
     gameOn = false;
     playerObj.chips -= 10;
