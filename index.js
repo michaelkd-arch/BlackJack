@@ -84,6 +84,7 @@ function clear() {
   sumEl.textContent = 'Sum: ';
   startButton = false;
   playerEl.textContent = `${playerObj.name}: ${playerObj.chips}$`;
+  messageEl.textContent = '';
 
   dealerEl.textContent = "Dealer's cards: ";
   dealerCards = [];
