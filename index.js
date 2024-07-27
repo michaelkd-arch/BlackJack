@@ -3,6 +3,7 @@ const sumEl = document.getElementById('sum-el');
 const chipEl = document.getElementById('chip-el')
 const btnStart = document.getElementById('btn-start');
 const btnNew = document.getElementById('btn-new');
+const btnStay = document.getElementById('btn-stay');
 const messageEl = document.getElementById('message-el');
 const playerEl = document.getElementById('player-el');
 
@@ -49,21 +50,6 @@ function startGame() {
 }
 
 
-function check() {
-  if (sum === 21) {
-    messageEl.textContent = 'You win. ';
-    gameOn = false;
-    playerObj.chips += 15;
-  } else if (sum < 21) {
-    //pass
-  } else {
-    messageEl.textContent = 'You lose. ';
-    gameOn = false;
-    playerObj.chips -= 10;
-  }
-}
-
-
 function getNewCard() {
   if (gameOn && startButton) {
     let newCard = getRandomCard();
@@ -72,7 +58,6 @@ function getNewCard() {
     sum += newCard;
     sumEl.textContent = `Sum: ${sum}`;
     check();
-    checkDealer();
     getDealerNewCard();
   }
 }
@@ -108,23 +93,47 @@ function getDealerNewCard() {
     dealerEl.textContent += ` - ${newCard}`;
     dealerSum += newCard;
     dealerSumEl.textContent = `Sum: ${dealerSum}`;
-    checkDealer();
+    check();
   }
-}
-
-
-function checkDealer() {
-  if (dealerSum > 21) {
-    messageEl.textContent = 'You win. ';
-    gameOn=false;
-    playerObj.chips += 15;
-  } else if (dealerSum === 21) {
-    messageEl.textContent = 'You lose. ';
-    gameOn = false;
-    playerObj.chips -= 10;
-  } 
 }
 
 
 btnStart.addEventListener('click', startGame);
 btnNew.addEventListener('click', getNewCard);
+btnStay.addEventListener('click', getDealerNewCard);
+
+
+function check() {
+  if (sum > dealerSum) {
+    if (sum === 21) {
+      messageEl.textContent = 'You win. ';
+      gameOn = false;
+      playerObj.chips += 15;
+    } else if (sum > 21) {
+      messageEl.textContent = 'You lose. ';
+      gameOn = false;
+      playerObj.chips -= 10;
+    } else {
+      //pass
+    }
+  } else if (dealerSum > sum) {
+      if (dealerSum === 21) {
+        messageEl.textContent = 'You lose. ';
+        gameOn = false;
+        playerObj.chips -= 10;
+      } else if (dealerSum > 21) {
+        messageEl.textContent = 'You win. ';
+        gameOn = false;
+        playerObj.chips += 15;
+      } else {
+        //pass
+      }
+  } else {
+    if (sum > 21) {
+      messageEl.textContent = 'Draw. ';
+      gameOn = false;
+    } else {
+      //pass
+    }
+  }
+}
